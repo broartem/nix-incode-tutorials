@@ -28,16 +28,19 @@ echo '<!doctype html><html><head><title>Hi</title></head></html>' >> /var/www/in
 # }
 nconf = "/etc/nginx/conf.d/test.conf"
 
-echo 'server {'                                 >> nconf
-echo '  location / {'                           >> nconf
-echo '      root /var/www;'                     >> nconf
-echo '  }'                                      >> nconf
-echo ''                                         >> nconf
-echo '  location ~ ^/files {'                   >> nconf
-echo '      rewrite ^/files(.*) $1 break;'      >> nconf
-echo '      root /var/www/myfiles;'             >> nconf
-echo '  }'                                      >> nconf
-echo '}'                                        >> nconf
+echo 'server {'                                 >> $nconf
+echo '  location / {'                           >> $nconf
+echo '      root /var/www;'                     >> $nconf
+echo '  }'                                      >> $nconf
+echo ''                                         >> $nconf
+echo '  location ~ ^/files {'                   >> $nconf
+echo '      rewrite ^/files(.*) $1 break;'      >> $nconf
+echo '      root /var/www/myfiles;'             >> $nconf
+echo '  }'                                      >> $nconf
+echo '}'                                        >> $nconf
+
+#remove default routes
+rm /etc/nginx/conf.d/default.conf
 
 # reload nginx config
 nginx -s reload
