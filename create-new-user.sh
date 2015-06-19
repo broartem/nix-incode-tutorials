@@ -1,21 +1,19 @@
 useradd ivan
 passwd ivan
 mkdir /home/ivan
-sudo chown ivan:ivan /home/ivan
+chown ivan:ivan /home/ivan
 
 # add to sudoers, ubuntu:
-sudo useradd ivan sudo
+adduser ivan sudo
 # fedora/centos
-# enter visudo command, It will open vim with /etc/sudoers file
-# find string "root     ALL=(ALL)      ALL"
-# and add string "user1     ALL=(ALL)      ALL" after it
+gpasswd wheel -a ivan
 
 # set up .bashrc
 cp /etc/skel/.bashrc ~/
 sudo chmod 644 ~/.bashrc
 
-# maybe neccessary or not, see http://askubuntu.com/questions/163802/backspace-tab-del-and-arrow-keys-not-working-in-terminal-using-ssh/208275
-chsh -s /bin/bash 
+# by default, stupid shell is set. To change to bash, type
+sudo chsh -s /bin/bash ivan
 
 # highly colored .bashrc, can be googled as The Ultimate bashrc
 cd ~
